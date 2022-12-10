@@ -3,7 +3,7 @@ let e = x => Math.E**(x)
 let sin = x => Math.sin(x)
 let cos = x => Math.cos(x)
 let ln = x => Math.log(x)
-
+// this is a test comment
 let parseValue = num => Number(parseFloat(num).toPrecision(15))
 // algorithm
 let initialXValue = 0.5

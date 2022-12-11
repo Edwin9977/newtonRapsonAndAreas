@@ -69,7 +69,7 @@ let sgvhtml = ''
 let counter = suggestedVal.length
 for (let i = 0 ; i < counter; i++){
     sgvhtml = sgvhtml + `<tr> 
-    <td>x = ${parseValue(suggestedVal[i][0])}  ==>  ${parseValue(suggestedVal[i][1])}</td>
+    <td>x = ${parseValue(suggestedVal[i][0])}  ==>  ${!isNaN(suggestedVal[i][1]) ? parseValue(suggestedVal[i][1]): suggestedVal[i][1]}</td>
     </tr>`
     if (parseValue(suggestedVal[i][0]) == parseValue(initialValue())){
         i = counter - 2

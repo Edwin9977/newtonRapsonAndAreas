@@ -4,6 +4,7 @@ let sin = x => Math.sin(x)
 let cos = x => Math.cos(x)
 let ln = x => Math.log(x)
 // this is a test comment
+console.log('text in console')
 let parseValue = num => Number(parseFloat(num).toPrecision(15))
 // algorithm
 let initialXValue = 0.5
@@ -15,6 +16,7 @@ let checkValue = a => {
     return a
 }
 let functionOfX = x => {
+    // here we defined the function as f(x)
     let fn = 
     // (1/2)*x*x*(sin(x) + 1)
     // cos(x) - x*x*x
@@ -64,10 +66,14 @@ let posibleValues = () => {
 
 let suggestedVal = posibleValues()
 let sgvhtml = ''
-for (let i = 0 ; i < suggestedVal.length; i++){
+let counter = suggestedVal.length
+for (let i = 0 ; i < counter; i++){
     sgvhtml = sgvhtml + `<tr> 
-    <td>x = ${suggestedVal[i][0]}  ==>  ${suggestedVal[i][1]}</td>
+    <td>x = ${parseValue(suggestedVal[i][0])}  ==>  ${parseValue(suggestedVal[i][1])}</td>
     </tr>`
+    if (parseValue(suggestedVal[i][0]) == parseValue(initialValue())){
+        i = counter - 2
+    }
 }
 let valuesTable = document.querySelector('div.posible-values table')
 valuesTable.outerHTML = '<table>' + sgvhtml + '</table>'
@@ -92,6 +98,8 @@ let headers = `<tr class="table-headers">
 </tr>`
 let tableBody = document.querySelector('body .newton-table-container tbody')
 let tableElements = ''
+let newtonIterations = 0
+let root = 0
 for (let i = 0; i < iterations; i++){
     let initial = initialXValue
     let nextValue = newtonRapson(initial, functionOfX(initial), derivative(initial))
@@ -102,8 +110,16 @@ for (let i = 0; i < iterations; i++){
     <td>${nextValue} </td>
     </tr>
     `
+    if (f == 0){
+        root = initial
+        newtonIterations = i + 1
+        break
+    }
     initialXValue = nextValue
 }
+
+let iterationContent = document.querySelector('div.iterations')
+iterationContent.textContent = `${newtonIterations} iterations were required to find the root that is ${root}`
 
 let tableContent = '<tbody>' + headers +  tableElements + '</tbody>'
 tableBody.outerHTML = tableContent
